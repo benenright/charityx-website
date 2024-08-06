@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityX - Empowering Change</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        .accordion-content {
+            transition: max-height 0.3s ease;
+        }
+        a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            color: #481CD9;
+        }
+        .text-purple-600 {
+            color: #481CD9 !important;
+        }
+        .bg-purple-600 {
+            background-color: #481CD9 !important;
+        }
+        .hero {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        @media (max-width: 640px) {
+            .mobile-donate {
+                display: block;
+                background-color: #481CD9;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 0.375rem;
+                text-align: center;
+                font-size: 1rem;
+                font-weight: 500;
+                margin-right: 0.5rem;
+            }
+        }
+        /* Dark mode styles */
+        body.dark {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        body.dark a {
+            color: #63b3ed;
+        }
+        body.dark .bg-white {
+            background-color: #2d3748;
+        }
+        body.dark .text-gray-900 {
+            color: #a0aec0;
+        }
+        body.dark .bg-gray-100 {
+            background-color: #2d3748;
+        }
+        body.dark .bg-gray-200 {
+            background-color: #4a5568;
+        }
+        body.dark .bg-gray-800 {
+            background-color: #1a202c;
+        }
+        body.dark .bg-gray-50 {
+            background-color: #2d3748;
+        }
+        body.dark .text-gray-600 {
+            color: #a0aec0;
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+
+            document.querySelectorAll('.accordion-toggle').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const content = button.parentElement.nextElementSibling;
+
+                            button.classList.toggle('active');
+
+                            if (button.classList.contains('active')) {
+                                content.style.maxHeight = content.scrollHeight + 'px';
+                                button.innerText = 'Hide ^';
+                            } else {
+                                content.style.maxHeight = 0;
+                                button.innerText = 'Show v';
+                            }
+                        });
+                    });
+
+            // Toggle dark mode based on local storage
+            const toggleSwitch = document.getElementById('dark-mode-toggle');
+            const currentMode = localStorage.getItem('mode');
+            if (currentMode === 'dark') {
+                document.body.classList.add('dark');
+                toggleSwitch.checked = true;
+            }
+            
+            toggleSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('dark');
+                    localStorage.setItem('mode', 'dark');
+                } else {
+                    document.body.classList.remove('dark');
+                    localStorage.setItem('mode', 'light');
+                }
+            });
+
+            const loadImage = (elementId, width, height) => {
+                const imgElement = document.getElementById(elementId);
+                imgElement.src = `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
+            };
+
+            document.querySelector('.hero').style.backgroundImage = `url(https://picsum.photos/1200/800?random=${Math.floor(Math.random() * 1000)})`;
+            loadImage('card-image-1', 400, 300);
+            loadImage('card-image-2', 400, 300);
+            loadImage('card-image-3', 400, 300);
+        });
+
+        // Toggle mega dropdown menu
+        document.addEventListener('click', (event) => {
+            if (event.target.matches('.nav-link, .nav-link *')) {
+                event.preventDefault();
+                const dropdown = event.target.closest('.nav-item').querySelector('.mega-dropdown');
+                document.querySelectorAll('.mega-dropdown').forEach(drop => {
+                    if (drop !== dropdown) {
+                        drop.classList.add('hidden');
+                    }
+                });
+                dropdown.classList.toggle('hidden');
+            } else {
+                document.querySelectorAll('.mega-dropdown').forEach(drop => drop.classList.add('hidden'));
+            }
+        });
+    </script>
+</head>
+<body class="text-gray-800 text-md lg:text-xl">
+
+    <!-- Navbar -->
+    <nav class="bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex">
+                    <div class="flex-shrink-0 logo flex items-center">
+                        <a href="charityx-homepage.html" class="text-2xl font-bold ">CharityX</a>
+                    </div>
+                </div>
+                <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <div class="nav hidden sm:ml-6 sm:mr-8 sm:flex sm:space-x-8 font-medium">
+                        <div class="nav-item">
+                            <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                                About us
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                    <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="charityx-index.html">About us</a></h2>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Our Mission</a>
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Our Team</a>
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Our Impact</a>
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">History</a>
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Financials</a>
+                                        <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">FAQ</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                                What we do
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                    <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="#">What we do</a></h2>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Programs</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Success Stories</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Research</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Advocacy</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Outreach</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Partnerships</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item">
+                            <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                                Get involved
+                                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                </svg>
+                            </a>
+                            <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                    <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="#">Get involved</a></h2>
+                                    <div class="grid grid-cols-3 gap-4">
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Volunteer</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Fundraise</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Events</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Donate</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Corporate Giving</a>
+                                        <a href="#" class="block text-purple-600 underline font-normal text-lg">Legacy Giving</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="nav-item relative">
+                            <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                                News
+                            </a>
+                        </div>
+                        <div class="nav-item relative">
+                            <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                                Events
+                            </a>
+                        </div>
+                        <button id="search-button" class="ml-2">
+                            <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <button> <a href="charityx-donate.html" class="bg-purple-600 text-white px-3 py-2 rounded-md text-lg font-medium">Donate</a></button>
+                    <div class="flex items-center ml-8">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <label for="dark-mode-toggle" class="ml-2 text-sm">Dark Mode</label>
+                    </div>
+                </div>
+                <div class="flex items-center sm:hidden">
+                    <a href="charityx-donate.html" class="bg-purple-600 text-white px-3 py-2 rounded-md text-lg font-medium mr-2">Donate</a>
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                    <button id="search-button" class="ml-2">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="search-field" class="hidden flex justify-center sm:mt-0 lg:m-4">
+                <input type="text" placeholder="Search..." class="px-4 py-2 border border-gray-300 rounded-md w-1/2">
+                <button class="bg-purple-600 text-white px-4 py-2 ml-2 rounded-md">Search</button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="sm:hidden hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="block pl-4 pr-4 py-2 border-t text-gray-900">About us</a>
+                <a href="#" class="block pl-4 pr-4 py-2 border-t text-gray-900">What we do</a>
+                <a href="#" class="block pl-4 pr-4 py-2 border-t text-gray-900">Get involved</a>
+                <a href="#" class="block pl-4 pr-4 py-2 border-t text-gray-900">News</a>
+                <a href="#" class="block pl-4 pr-4 py-2 border-t text-gray-900">Events</a>
+            </div>
+        </div>
+    </nav>
+
+<!-- Breadcrumb -->
+<div class="bg-gray-800">
+    <div class="max-w-7xl mx-auto p-4 lg:px-8">
+        <ol class="flex space-x-2 text-gray-400 text-sm">
+            <li>
+                <a href="#" class="hover:underline text-gray-200">Home</a>
+            </li>
+            <li>
+                <span class="text-gray-500">></span>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">About us</a>
+            </li>
+            <li>
+                <span class="text-gray-500">></span>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Our Mission</a>
+            </li>
+            <li>
+                <span class="text-gray-500">></span>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Get Involved</a>
+            </li>
+            <li>
+                <span class="text-gray-500">></span>
+            </li>
+            <li>
+                <a href="#" class="hover:underline">Volunteer</a>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<!-- Main Content Section -->
+<section class="py-16 lg:py-20">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 lg:mb-8 leading-tight max-w-5xl">Empowering Communities for a Better Future</h1>
+        <div class="max-w-3xl">
+            <p class="mb-16 text-xl lg:text-2xl font-normal leading-normal">At CharityX, our mission is to bring lasting change to communities in need through dedicated service, sustainable programs, and compassionate outreach. Join us in making a difference.</p>
+
+            <div class="mx-auto my-16">
+                <figure>
+                    <img src="https://picsum.photos/400/300?random=1" alt="Our volunteers at work during a community event" class="w-full h-auto rounded-lg">
+                    <figcaption class="text-gray-600 text-sm mt-2">Our volunteers at work during a community event.</figcaption>
+                </figure>
+            </div>
+
+            <h2 class="text-3xl font-bold mt-12 mb-4">Our Initiatives</h2>
+            <p class="mb-8">Our various initiatives focus on education, healthcare, and economic development. We believe in a holistic approach to uplift communities and provide them with the tools they need to succeed.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-4">Education Programs</h3>
+            <p class="mb-8">Through our education programs, we aim to provide quality education to children and adults. We work with local schools and educational institutions to enhance learning opportunities and promote lifelong learning.</p>
+            <ul class="list-disc list-inside mb-4">
+                <li class="mb-2">Scholarship programs for underprivileged students.</li>
+                <li class="mb-2">Adult literacy and vocational training.</li>
+                <li class="mb-2">Building and equipping local libraries.</li>
+            </ul>
+            <p class="mb-8">Our efforts have resulted in increased literacy rates and better educational outcomes for thousands of individuals. We continue to expand our reach to ensure no one is left behind.</p>
+            <p class="mb-8">For more information, visit our <a href="/contact" class="text-purple-600">contact page</a>.</p>
+            
+            <table class="w-full border-collapse text-base my-16">
+                <caption class="bg-gray-900 text-white p-4 font-bold text-left">Impact of Our Programs</caption>
+                <thead>
+                    <tr>
+                        <th class="border border-black p-4 bg-gray-100 font-bold text-left">Program</th>
+                        <th class="border border-black p-4 bg-gray-100 font-bold text-left">Beneficiaries</th>
+                        <th class="border border-black p-4 bg-gray-100 font-bold text-left">Success Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border border-black p-4">Education</td>
+                        <td class="border border-black p-4">10,000+</td>
+                        <td class="border border-black p-4">95%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black p-4">Healthcare</td>
+                        <td class="border border-black p-4">15,000+</td>
+                        <td class="border border-black p-4">90%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black p-4">Economic Development</td>
+                        <td class="border border-black p-4">8,000+</td>
+                        <td class="border border-black p-4">85%</td>
+                    </tr>
+                    <tr>
+                        <td class="border border-black p-4">Community Outreach</td>
+                        <td class="border border-black p-4">12,000+</td>
+                        <td class="border border-black p-4">92%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <h2 class="text-3xl font-bold mt-12 mb-4">Healthcare Initiatives</h2>
+            <p class="mb-8">Our healthcare programs focus on providing essential medical services to underserved communities. We conduct health camps, provide medical supplies, and work towards improving overall health outcomes.</p>
+            <h3 class="text-2xl font-bold mt-12 mb-4">Economic Development</h3>
+            <p class="mb-8">We support economic development by offering microloans, business training, and support for small businesses. Our goal is to help individuals achieve financial independence and stability.</p>
+        </div>
+    </div>
+</section>
+
+<section class="py-20 bg-gray-100">
+    <div class="max-w-7xl mx-auto px-10 sm:px-6 lg:px-8">
+        <div class="max-w-5xl">
+            <blockquote class="text-gray-900 text-3xl lg:text-4xl font-semibold">
+                “CharityX has transformed our community. Thanks to their support, we now have better education and healthcare facilities. The impact is visible in every household.”
+            </blockquote>
+            <p class="text-gray-600 text-sm mt-6 mb-6">- Community Leader, Village X</p>
+            <a href="#" class="text-purple-600 mt-2 underline">Read more testimonials</a>
+        </div>
+    </div>
+</section>
+
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+            <h2 class="text-3xl font-bold mt-12 mb-4">Get Involved</h2>
+            <p class="mb-8">We invite you to join us in our mission to create lasting change. There are many ways to get involved, whether through volunteering, fundraising, or spreading awareness. Together, we can make a difference.</p>
+            <div class="accordion mt-12">
+                <div class="accordion-item border-y border-gray-300">
+                    <div class="flex justify-between items-center py-4">
+                        <span class="text-xl font-bold">Volunteer Opportunities</span>
+                        <button class="accordion-toggle text-base text-purple-600 focus:outline-none">Show v</button>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden">
+                        <p class="pb-8">We have a range of volunteer opportunities available, from local community events to international projects. Your time and skills can make a significant impact.</p>
+                    </div>
+                </div>
+                <div class="accordion-item border-b border-gray-300">
+                    <div class="flex justify-between items-center py-4">
+                        <span class="text-xl font-bold">Fundraising Events</span>
+                        <button class="accordion-toggle text-base text-purple-600 focus:outline-none">Show v</button>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden">
+                        <p class="pb-8">Participate in or organize fundraising events to support our programs. From charity runs to bake sales, there are many fun and impactful ways to raise funds.</p>
+                    </div>
+                </div>
+                <div class="accordion-item border-b border-gray-300">
+                    <div class="flex justify-between items-center py-4">
+                        <span class="text-xl font-bold">Corporate Partnerships</span>
+                        <button class="accordion-toggle text-base text-purple-600 focus:outline-none">Show v</button>
+                    </div>
+                    <div class="accordion-content max-h-0 overflow-hidden">
+                        <p class="pb-8">We work with businesses to create mutually beneficial partnerships. Learn how your company can support our mission through donations, sponsorships, and employee engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA banner -->
+<div class="container mx-auto lg:px-4 py-16">
+  <div class="bg-gray-800 text-white sm:rounded-lg overflow-hidden flex flex-col lg:flex-row">
+    <div class="flex-1 py-20 p-10 lg:py-32 lg:p-16">
+        <h2 class="text-4xl lg:text-5xl font-bold mb-4">Join Us in Making a Difference</h2>
+        <p class="mb-10">Support our mission by donating today. Your contribution will help us continue our work and reach more communities in need.</p>
+        <a href="#" class="bg-purple-600 text-white px-4 py-4 rounded-md text-lg font-medium">Donate Now</a>
+    </div>
+    <div class="flex-1 bg-gray-200 flex items-center justify-center">
+      <img id="cta-image" src="https://picsum.photos/800/600" alt="Campaign Image" class="w-full h-full object-cover">
+    </div>
+  </div>
+</div>
+
+<!-- Section Summary -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8">Our Programs</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-1" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Educational Initiatives</a></h3>
+                    <p class="mb-4 text-base">We aim to provide quality education to children and adults, ensuring lifelong learning opportunities for all.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-2" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Healthcare Programs</a></h3>
+                    <p class="mb-4 text-base">Our healthcare initiatives focus on providing essential medical services to underserved communities.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-3" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Economic Development</a></h3>
+                    <p class="mb-4 text-base">We support economic development through microloans, business training, and support for small businesses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center">
+            <div class="text-md text-gray-600">
+                <a href="#" class="text-purple-600 underline mr-4">Home</a>
+                <a href="#" class="text-purple-600 underline mr-4">About us</a>
+                <a href="#" class="text-purple-600 underline mr-4">What we do</a>
+                <a href="#" class="text-purple-600 underline mr-4">Get involved</a>
+                <a href="#" class="text-purple-600 underline mr-4">Contact</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Icon" class="h-6 w-6"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Icon" class="h-6 w-6"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter Icon" class="h-6 w-6"></a>
+            </div>
+        </div>
+        <p class="mt-4 text-sm text-gray-600 max-w-3xl">
+            © 2024 CharityX. Registered charity in England and Wales. CharityX is dedicated to improving the lives of communities through various initiatives focused on education, healthcare, and economic development.
+        </p>
+        <div class="flex space-x-4 mt-4 text-sm text-gray-600">
+            <a href="#" class="underline">Terms & conditions</a>
+            <a href="#" class="underline">Modern Slavery Act statement</a>
+            <a href="#" class="underline">Accessibility</a>
+            <a href="#" class="underline">Privacy & cookies</a>
+            <a href="#" class="underline">Manage cookies</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        var menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+
+    document.getElementById('search-button').addEventListener('click', function() {
+        var searchField = document.getElementById('search-field');
+        searchField.classList.toggle('hidden');
+    });
+</script>
+
+</body>
+</html>
