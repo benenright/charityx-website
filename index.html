@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CharityX - Homepage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            color: #481CD9;
+        }
+        .text-purple-600 {
+            color: #481CD9 !important;
+        }
+        .bg-purple-600 {
+            background-color: #481CD9 !important;
+        }
+        .hero {
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        .hero-overlay {
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        @media (max-width: 640px) {
+            .mobile-donate {
+                display: block;
+                background-color: #481CD9;
+                color: white;
+                padding: 0.5rem 1rem;
+                border-radius: 0.375rem;
+                text-align: center;
+                font-size: 1rem;
+                font-weight: 500;
+                margin-right: 0.5rem;
+            }
+        }
+        /* Dark mode styles */
+        body.dark {
+            background-color: #1a202c;
+            color: #cbd5e0;
+        }
+        body.dark a {
+            color: #63b3ed;
+        }
+        body.dark .bg-white {
+            background-color: #2d3748;
+        }
+        body.dark .text-gray-900 {
+            color: #a0aec0;
+        }
+        body.dark .bg-gray-100 {
+            background-color: #2d3748;
+        }
+        body.dark .bg-gray-200 {
+            background-color: #4a5568;
+        }
+        body.dark .bg-gray-800 {
+            background-color: #1a202c;
+        }
+        body.dark .bg-gray-50 {
+            background-color: #2d3748;
+        }
+        body.dark .text-gray-600 {
+            color: #a0aec0;
+        }
+    </style>
+    <script>            
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Load includes
+            const components = ['impact'];
+
+            components.forEach(component => {
+                fetch(`${component}.html`)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById(component).innerHTML = data;
+                    })
+                    .catch(error => console.error('Error loading component:', error));
+            });
+
+            // Toggle dark mode based on local storage
+            const toggleSwitch = document.getElementById('dark-mode-toggle');
+            const currentMode = localStorage.getItem('mode');
+            if (currentMode === 'dark') {
+                document.body.classList.add('dark');
+                toggleSwitch.checked = true;
+            }
+            
+            toggleSwitch.addEventListener('change', function() {
+                if (this.checked) {
+                    document.body.classList.add('dark');
+                    localStorage.setItem('mode', 'dark');
+                } else {
+                    document.body.classList.remove('dark');
+                    localStorage.setItem('mode', 'light');
+                }
+            });
+
+            const headlines = [
+                "Empowering lives, building futures",
+                "Together we can make a difference",
+                "Transforming communities, one step at a time",
+                "Bringing hope to every heart",
+                "United for a better tomorrow",
+                "Changing lives, one step at a time",
+                "Hope, dignity, and opportunity for all",
+                "Building stronger communities together",
+                "Creating brighter futures for vulnerable children",
+                "Empowering women, transforming communities",
+                "Together we can end homelessness",
+                "Health, education, and empowerment for all",
+                "Protecting the planet, one action at a time",
+                "Supporting families, building resilience",
+                "From crisis to stability: helping those in need"
+            ];
+
+            const loadImage = (elementId, width, height) => {
+                const imgElement = document.getElementById(elementId);
+                imgElement.src = `https://picsum.photos/${width}/${height}?random=${Math.floor(Math.random() * 1000)}`;
+            };
+
+            const randomHeadline = headlines[Math.floor(Math.random() * headlines.length)];
+            document.getElementById('mission').innerText = randomHeadline;
+
+            document.querySelector('.hero').style.backgroundImage = `url(https://picsum.photos/1200/800?random=${Math.floor(Math.random() * 1000)})`;
+            loadImage('card-image-1', 400, 300);
+            loadImage('card-image-2', 400, 300);
+            loadImage('card-image-3', 400, 300);
+            loadImage('card-image-4', 400, 300);
+            loadImage('card-image-5', 400, 300);
+            loadImage('card-image-6', 400, 300);
+        });
+
+        // Toggle mega dropdown menu
+        document.addEventListener('click', (event) => {
+            if (event.target.matches('.nav-link, .nav-link *')) {
+                event.preventDefault();
+                const dropdown = event.target.closest('.nav-item').querySelector('.mega-dropdown');
+                document.querySelectorAll('.mega-dropdown').forEach(drop => {
+                    if (drop !== dropdown) {
+                        drop.classList.add('hidden');
+                    }
+                });
+                dropdown.classList.toggle('hidden');
+            } else {
+                document.querySelectorAll('.mega-dropdown').forEach(drop => drop.classList.add('hidden'));
+            }
+        });
+    </script>
+</head>
+<body class="text-gray-800 text-md lg:text-xl">
+
+<!-- Navbar -->
+<nav class="bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-20">
+            <div class="flex">
+                <div class="flex-shrink-0 logo flex items-center">
+                    <a href="charityx-homepage.html" class="text-2xl font-bold ">CharityX</a>
+                </div>
+            </div>
+            <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                <div class="nav hidden sm:ml-6 sm:mr-8 sm:flex sm:space-x-8 font-medium">
+                    <div class="nav-item">
+                        <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                            About us
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="charityx-index.html">About us</a></h2>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="charityx-standard.html" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                            What we do
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="#">What we do</a></h2>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-item">
+                        <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                            Get involved
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <div class="mega-dropdown hidden absolute left-0 top-full w-screen bg-gray-50 shadow-md z-10">
+                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+                                <h2 class="text-3xl mb-8 font-bold text-purple-600 underline"><a href="#">Get involved</a></h2>
+                                <div class="grid grid-cols-3 gap-4">
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                    <a href="#" class="block text-purple-600 underline font-normal text-lg">Secondary nav link</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav-item relative">
+                        <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                            News
+                            <!-- <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg> -->
+                        </a>
+<!--                         <div class="mega-dropdown hidden absolute left-0 top-full w-full bg-white shadow-md">
+                            <div class="grid grid-cols-3 p-8 gap-4">
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="nav-item relative">
+                        <a href="#" class="nav-link text-gray-900 inline-flex items-center px-1 pt-1 text-lg ">
+                            Events
+<!--                             <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg> -->
+                        </a>
+<!--                         <div class="mega-dropdown hidden absolute left-0 top-full w-full bg-white shadow-md">
+                            <div class="grid grid-cols-3 p-8 gap-4">
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                                <a href="#" class="block text-purple-600">Secondary nav link</a>
+                            </div>
+                        </div> -->
+                    </div>
+                    <button id="search-button" class="ml-2">
+                        <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button> <a href="charityx-donate.html" class="bg-purple-600 text-white px-3 py-2 rounded-md text-lg font-medium">Donate</a></button>
+                <div class="flex items-center ml-8">
+                    <input type="checkbox" id="dark-mode-toggle">
+                    <label for="dark-mode-toggle" class="ml-2 text-sm">Dark Mode</label>
+                </div>
+            </div>
+            <div class="flex items-center sm:hidden">
+                <a href="charityx-donate.html" class="bg-purple-600 text-white px-3 py-2 rounded-md text-lg font-medium mr-2">Donate</a>
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-900 focus:outline-none">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <button id="search-button" class="ml-2">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M17 10a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="search-field" class="hidden flex justify-center sm:mt-0 lg:m-4">
+            <input type="text" placeholder="Search..." class="px-4 py-2 border border-gray-300 rounded-md w-1/2">
+            <button class="bg-purple-600 text-white px-4 py-2 ml-2 rounded-md">Search</button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="sm:hidden hidden">
+        <div class="pt-2 pb-3 space-y-1 font-medium">
+            <a href="#" class="block pl-6 pr-4 py-4 border-t text-gray-900 mt-0">About us</a>
+            <a href="#" class="block pl-6 pr-4 py-4 border-t text-gray-900 mt-0">What we do</a>
+            <a href="#" class="block pl-6 pr-4 py-4 border-t text-gray-900 mt-0">Get involved</a>
+            <a href="#" class="block pl-6 pr-4 py-4 border-t text-gray-900 mt-0">News</a>
+            <a href="#" class="block pl-6 pr-4 py-4 border-t text-gray-900 mt-0">Events</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero bg-gray-600 text-white pt-60 pb-4 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="hero-overlay bg-gray-800 w-full md:w-1/2 px-8 sm:px-6 lg:px-12 py-10 lg:py-20 rounded-xl">
+            <div>
+                <h1 id="hero-headline" class="text-3xl lg:text-4xl xl:text-4xl font-bold mb-2 lg:mb-4 leading-tight lg:leading-tight xl:leading-tight">Homepage title that should be concise but may wrap</h1>
+                <p class="mb-8 lg:mb-12">Optional description field that should be concise and potentially have a character limit applied.</p>
+                <a href="#" class="bg-purple-600 text-white px-4 py-4 rounded-md text-lg font-medium">Optional button</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Hero Section (oxfam experiment) -->
+<!-- <section class="relative bg-gray-800 text-white">
+    <img src="https://via.placeholder.com/1600x600" alt="Background Image" class="w-full h-auto object-cover">
+    <div class="absolute inset-0 flex items-center justify-end p-10">
+        <div class="bg-red-600 text-white p-8 rounded-md max-w-sm">
+            <h1 class="text-3xl font-bold mb-2">GAZA CRISIS APPEAL</h1>
+            <p class="mb-6">Please give what you can today.</p>
+            <a href="#" class="bg-white text-red-600 px-4 py-2 rounded-md text-lg font-medium">DONATE NOW</a>
+        </div>
+    </div>
+</section> -->
+
+
+<!-- Mission Section -->
+<section class="py-20 bg-gray-100">
+    <div class="max-w-3xl mx-auto px-12 lg:px-0">
+        <h2 id="mission" class="text-5xl lg:text-5xl xl:text-6xl font-bold mb-4 leading-tight lg:leading-tight xl:leading-tight">Mission statement banner text that should be concise but may wrap over multiple lines.</h2>
+        <p class="mb-6">Discover the driving force behind Hope Horizon and how we aim to create a better world.</p>
+        <a href="#" class="text-purple-600 underline">This is a link</a>
+    </div>
+</section>
+
+
+<!-- Section Summary -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8">Section title</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-1" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Card title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-2" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Card title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-3" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Card title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA banner -->
+<div class="container mx-auto lg:px-4 py-16">
+  <div class="bg-gray-800 text-white sm:rounded-xl overflow-hidden flex flex-col lg:flex-row">
+    <div class="flex-1 py-20 p-10 lg:py-32 lg:p-16">
+        <h2 class="text-4xl lg:text-5xl font-bold mb-4">CTA banner title that should be concise</h2>
+        <p class="mb-10">CTA banner description that may wrap over two or three lines but should be kept as concise as possible.</p>
+        <a href="#" class="bg-purple-600 text-white px-4 py-4 rounded-xl text-lg font-medium">Action button</a>
+    </div>
+    <div class="flex-1 bg-gray-200 flex items-center justify-center">
+      <img id="cta-image" src="https://picsum.photos/800/600" alt="Campaign Image" class="w-full h-full object-cover">
+    </div>
+  </div>
+</div>
+    
+<!-- Additional Section Summary -->
+<section class="py-20">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8">Link box title</h2>
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-2">
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+            <a href="#" class="text-purple-600 underline border rounded-lg p-4">This is a link</a>
+        </div>
+    </div>
+</section>
+
+<!-- News Feed -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8">
+        <h2 class="text-3xl font-bold mb-8">News feed</h2>
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-4" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Article longer wrapping title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                    <p class="text-sm text-gray-600">Publication date • Topic • Content type</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border">
+                <img id="card-image-5" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto">
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Article longer wrapping title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                    <p class="text-sm text-gray-600">Publication date • Topic • Content type</p>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl border flex items-center">
+                <!-- <img id="card-image-6" src="https://picsum.photos/400/300" alt="Card Image" class="rounded-tl-xl rounded-tr-xl w-full h-auto"> -->
+                <div class="p-10">
+                    <h3 class="text-2xl font-bold mb-2"><a href="#" class="text-purple-600 underline">Article longer wrapping title and link</a></h3>
+                    <p class="mb-4 text-base">Lorem ipsum dolor sit amet consectetur. Risus tellus egestas sit tincidunt tempor auctor rhoncus.</p>
+                    <p class="text-sm text-gray-600">Publication date • Topic • Content type</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Impact -->
+<section class="py-16">
+  <div class="container mx-auto px-6">
+    <h2 class="text-4xl font-bold text-center mb-12">Our Impact</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-16 text-center">
+      <div>
+        <span class="text-6xl font-bold">20K+</span>
+        <p class="text-xl mt-2 font-bold">People Assisted</p>
+        <p class="text-base text-gray-600 mt-2">Optional supporting text that puts a large stat number into context</p>
+      </div>
+      <div>
+        <span class="text-6xl font-bold">30%</span>
+        <p class="text-xl mt-2 font-bold">Countries Served</p>
+        <p class="text-base text-gray-600 mt-2">Optional supporting text that puts a large stat number into context</p>
+      </div>
+      <div>
+        <span class="text-6xl font-bold">10+</span>
+        <p class="text-xl mt-2 font-bold">Years of Experience</p>
+        <p class="text-base text-gray-600 mt-2">Optional supporting text that puts a large stat number into context</p>
+      </div>
+      <div>
+        <span class="text-6xl font-bold">£5mil</span>
+        <p class="text-xl mt-2 font-bold">Active Projects</p>
+        <p class="text-base text-gray-600 mt-2">Optional supporting text that puts a large stat number into context</p>
+      </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="#" class="text-purple-600 underline">This is an optional link</a>
+    </div>
+  </div>
+</section>
+
+<!-- Donation Widget -->
+<div class="container mx-auto px-6 py-16">
+    <div class="bg-white rounded-xl w-full flex flex-col md:flex-row">
+        <!-- Donation Form -->
+        <div class="bg-gray-900 text-white p-10 lg:p-16 rounded-t-xl md:rounded-l-xl md:rounded-tr-none w-full md:w-1/2 order-1 md:order-1">
+            <h2 class="text-3xl font-bold mb-6">Donate widget title that may wrap over multiple lines</h2>
+            
+            <div class="mb-4 flex w-full">
+                <button class="w-1/2 px-4 py-2 border border-gray-500 text-gray-200 font-medium rounded-l-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 bg-purple-600">Monthly</button>
+                <button class="w-1/2 px-4 py-2 border border-gray-500 text-gray-200 font-medium rounded-r-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">One off</button>
+            </div>
+            
+            <div class="mb-4 flex space-x-2 w-full">
+                <button class="w-1/3 bg-purple-600 text-white px-4 py-2 rounded-md font-medium">£2</button>
+                <button class="w-1/3 border border-gray-500 text-gray-200 px-4 py-2 rounded-md font-medium">£5</button>
+                <button class="w-1/3 border border-gray-500 text-gray-200 px-4 py-2 rounded-md font-medium">£10</button>
+            </div>
+            
+            <p class="mb-4 text-md">£10 could lorem ipsum dolor sit amet consectetur. Enim mi leo quam amet quisque rhoncus tellus</p>
+            
+            <div class="mb-4">
+                <input type="text" class="w-full px-4 py-2 border border-gray-500 rounded-md bg-gray-800 text-white" placeholder="£ Choose your own amount">
+            </div>
+            
+            <div class="flex flex-col md:flex-row md:items-center">
+                <button class="bg-purple-600 text-white px-4 py-2 rounded-md font-medium w-full md:w-auto md:flex-grow">Donate £2 a month</button>
+                <div class="flex mt-4 md:mt-0 md:ml-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Direct_Debit_logo.png" alt="DD" class="h-6 ml-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple Pay" class="h-6 ml-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/PayPal_logo.svg/1920px-PayPal_logo.svg.png" alt="PayPal" class="h-6 ml-4">
+                </div>
+            </div>
+        </div>
+        
+        <!-- Placeholder for Image -->
+        <div class="bg-gray-200 w-full md:w-1/2 flex items-center justify-center rounded-b-xl md:rounded-r-xl md:rounded-bl-none order-2 md:order-2">
+            <img src="https://picsum.photos/800/600" alt="Placeholder Image" class="w-full h-full object-cover rounded-b-xl md:rounded-r-xl md:rounded-bl-none">
+        </div>
+    </div>
+</div>
+
+
+<!-- Footer -->
+<footer class="bg-white py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center">
+            <div class="text-md text-gray-600">
+                <a href="#" class="text-purple-600 underline mr-4">This is a link</a>
+                <a href="#" class="text-purple-600 underline mr-4">This is a link</a>
+                <a href="#" class="text-purple-600 underline mr-4">This is a link</a>
+                <a href="#" class="text-purple-600 underline mr-4">This is a link</a>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram Icon" class="h-6 w-6"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook Icon" class="h-6 w-6"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter Icon" class="h-6 w-6"></a>
+            </div>
+        </div>
+        <p class="mt-4 text-sm text-gray-600 max-w-3xl">
+            © 2024 registered charity in England and Wales. Lorem ipsum dolor sit amet consectetur. Sed fringilla blandit vel massa mollis pretium tincidunt pellentesque lectus. Ultramper velit eu amet eleifend. Etiam integer pellentesque feugiat eu eu quisque tincidunt pharetra.
+        </p>
+        <div class="flex space-x-4 mt-4 text-sm text-gray-600">
+            <a href="#" class="underline">Terms & conditions</a>
+            <a href="#" class="underline">Modern Slavery Act statement</a>
+            <a href="#" class="underline">Accessibility</a>
+            <a href="#" class="underline">Privacy & cookies</a>
+            <a href="#" class="underline">Manage cookies</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('mobile-menu-button').addEventListener('click', function() {
+        var menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('hidden');
+    });
+
+    document.getElementById('search-button').addEventListener('click', function() {
+        var searchField = document.getElementById('search-field');
+        searchField.classList.toggle('hidden');
+    });
+</script>
+
+</body>
+</html>
